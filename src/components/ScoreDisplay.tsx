@@ -30,7 +30,7 @@ interface Props {
 }
 
 export default function ScoreDisplay({ scores, roundNumber = 1 }: Props) {
-  const [animatedPool, setAnimatedPool] = useState(0);
+  const [animatedPool, setAnimatedPool] = useState(PRIZE_POOL);
 
   // Animate prize pool number
   useEffect(() => {
