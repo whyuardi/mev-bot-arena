@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Lightning, List, X } from "@phosphor-icons/react";
 import { useState } from "react";
+import { WalletButton } from "./WalletConnect";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -38,22 +39,11 @@ export default function Header() {
           >
             Leaderboard
           </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-white"
-          >
-            Docs
-          </Link>
         </nav>
 
         {/* Desktop CTA */}
         <div className="hidden items-center gap-4 md:flex">
-          <button className="rounded-lg border border-border bg-surface/50 px-4 py-2 text-sm font-medium text-zinc-300 transition-all duration-200 hover:border-accent/30 hover:bg-accent/5 hover:text-white">
-            <span className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-green animate-pulse" />
-              Connect Wallet
-            </span>
-          </button>
+          <WalletButton />
         </div>
 
         {/* Mobile Menu Button */}
@@ -84,18 +74,8 @@ export default function Header() {
             >
               Leaderboard
             </Link>
-            <Link
-              href="#"
-              className="rounded-lg px-3 py-2.5 text-sm font-medium text-zinc-400 transition-colors hover:bg-accent/5 hover:text-white"
-              onClick={() => setMobileOpen(false)}
-            >
-              Docs
-            </Link>
             <div className="mt-2 border-t border-border/40 pt-2">
-              <button className="flex w-full items-center gap-2 rounded-lg border border-border bg-surface/50 px-3 py-2.5 text-sm font-medium text-zinc-300 transition-all hover:border-accent/30 hover:bg-accent/5 hover:text-white">
-                <span className="h-2 w-2 rounded-full bg-green animate-pulse" />
-                Connect Wallet
-              </button>
+              <WalletButton />
             </div>
           </nav>
         </div>

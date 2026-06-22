@@ -9,6 +9,7 @@ import {
   FloppyDisk,
   CheckCircle,
 } from "@phosphor-icons/react";
+import { useWallet } from "./WalletConnect";
 
 const STRATEGIES = [
   "Sandwich",
@@ -37,9 +38,14 @@ export default function BotCreator({ onDeploy }: Props) {
   const [loading, setLoading] = useState(false);
   const [deployed, setDeployed] = useState(false);
   const [strategyOpen, setStrategyOpen] = useState(false);
+  const { isConnected, connect } = useWallet();
 
-  const handleDeploy = useCallback(() => {
+  const handleDeploy = useCallback(async () => {
     if (!name.trim()) return;
+    if (!isConnected) {
+      await connect();
+      return;
+    }
     setLoading(true);
 
     // Simulate deployment delay
@@ -56,7 +62,7 @@ export default function BotCreator({ onDeploy }: Props) {
         setStrategy("Arbitrage");
       }, 2000);
     }, 1500);
-  }, [name, strategy, capital, onDeploy]);
+  }, [name, strategy, capital, onDeploy, isConnected, connect]);
 
   return (
     <div className="relative overflow-hidden rounded-xl border border-border/60 bg-card/30 backdrop-blur-sm p-5 sm:p-6">
@@ -212,6 +218,11 @@ export default function BotCreator({ onDeploy }: Props) {
                 />
               </svg>
               Deploying...
+            </>
+          ) : !isConnected ? (
+            <>
+              <FloppyDisk size={16} weight="fill" />
+              Connect Wallet to Deploy
             </>
           ) : (
             <>
